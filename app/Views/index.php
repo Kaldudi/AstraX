@@ -5,22 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home / AstraX</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?= base_url('style.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Splash Screen -->
     <div id="splash-screen">
-        <img src="Images/AstraX.jpg" alt="AstraX Logo">
+        <img src="<?= base_url('Images/AstraX.jpg') ?>" alt="AstraX Logo">
     </div>
 
     <div class="layout">
-        <!-- Sidebar -->
         <header class="sidebar">
             <div class="sidebar-container">
                 <div class="logo">
-                    <img src="Images/AstraX.jpg" alt="AstraX Logo">
+                    <img src="<?= base_url('Images/AstraX.jpg') ?>" alt="AstraX Logo">
                 </div>
                 <nav class="nav-links">
                     <a href="#" class="nav-item active">
@@ -31,7 +29,6 @@
                             </svg></div>
                         <span>Home</span>
                     </a>
-                    <!-- Explore -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -40,7 +37,6 @@
                             </svg></div>
                         <span>Explore</span>
                     </a>
-                    <!-- Notifications -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -49,7 +45,6 @@
                             </svg></div>
                         <span>Notifications</span>
                     </a>
-                    <!-- Messages -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -58,7 +53,6 @@
                             </svg></div>
                         <span>Messages</span>
                     </a>
-                    <!-- Bookmarks -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -67,7 +61,6 @@
                             </svg></div>
                         <span>Bookmarks</span>
                     </a>
-                    <!-- Communities -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -76,12 +69,10 @@
                             </svg></div>
                         <span>Communities</span>
                     </a>
-                    <!-- Premium -->
                     <a href="#" class="nav-item">
-                        <div class="nav-icon"><img src="Images/AstraX.jpg" alt="AstraX Premium Logo"></div>
+                        <div class="nav-icon"><img src="<?= base_url('Images/AstraX.jpg') ?>" alt="AstraX Premium Logo"></div>
                         <span>Premium</span>
                     </a>
-                    <!-- Profile -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -90,7 +81,6 @@
                             </svg></div>
                         <span>Profile</span>
                     </a>
-                    <!-- More -->
                     <a href="#" class="nav-item">
                         <div class="nav-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -102,19 +92,23 @@
                 </nav>
                 <button class="post-btn">Post</button>
 
+<?php if (session()->get('isLoggedIn')): ?>
                 <div class="user-profile">
-                    <img src="https://ui-avatars.com/api/?name=User+Name&background=random" alt="User Profile"
-                        class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=Albert&background=random" alt="User Profile" class="avatar">
                     <div class="user-info">
                         <div class="name">Albert</div>
                         <div class="handle">@Albert</div>
                     </div>
-                    <div class="options-icon">···</div>
+                    <a href="<?= base_url('logout') ?>" class="options-icon" style="text-decoration:none; color:inherit; font-size:12px; font-weight:bold; padding:4px;" title="Logout">Log out</a>
                 </div>
+<?php else: ?>
+                <a href="<?= base_url('login') ?>" class="user-profile" style="text-decoration: none; justify-content: center; cursor: pointer; border: 1px solid var(--border-color);">
+                    <div class="name" style="font-size: 16px; font-weight: bold; color: var(--text-color);">Log in</div>
+                </a>
+<?php endif; ?>
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="timeline">
             <div class="timeline-header">
                 <div class="tabs">
@@ -128,48 +122,28 @@
                 </div>
             </div>
 
-            <!-- Compose Box -->
+
+<?php if (session()->get('isLoggedIn')): ?>
             <div class="compose-box">
-                <img src="https://ui-avatars.com/api/?name=User+Name&background=random" alt="Avatar" class="avatar">
+                <img src="https://ui-avatars.com/api/?name=Albert&background=random" alt="Avatar" class="avatar">
                 <div class="compose-content">
                     <textarea placeholder="What is happening?!"></textarea>
                     <div class="compose-actions">
                         <div class="icons">
-                            <!-- Image Icon -->
-                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)">
-                                    <path
-                                        d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z">
-                                    </path>
-                                </svg></div>
-                            <!-- GIF Icon -->
-                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)">
-                                    <path
-                                        d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v13c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-13c0-.276-.224-.5-.5-.5h-13zM7.5 14.5v-5h3v1.5h-1.5v2H10v1.5H7.5zm5-5h1.5v5H12.5v-5zm3.5 0h3v1.5h-1.5v1H19v1.5h-1.5v2H16v-5z">
-                                    </path>
-                                </svg></div>
-                            <!-- Poll Icon -->
-                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)">
-                                    <path
-                                        d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v13c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-13c0-.276-.224-.5-.5-.5h-13zM7 9h10v2H7V9zm0 4h7v2H7v-2z">
-                                    </path>
-                                </svg></div>
-                            <!-- Emoji Icon -->
-                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)">
-                                    <path
-                                        d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2.5-9.5c.828 0 1.5-.672 1.5-1.5S10.328 7.5 9.5 7.5 8 8.172 8 9s.672 1.5 1.5 1.5zm6.5-1.5c0 .828-.672 1.5-1.5 1.5S13 9.828 13 9s.672-1.5 1.5-1.5 1.5.672 1.5 1.5zm-5 6c1.603 0 3.035-.783 3.945-2H9.055c.91 1.217 2.342 2 3.945 2z">
-                                    </path>
-                                </svg></div>
+                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path></svg></div>
+                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v13c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-13c0-.276-.224-.5-.5-.5h-13zM7.5 14.5v-5h3v1.5h-1.5v2H10v1.5H7.5zm5-5h1.5v5H12.5v-5zm3.5 0h3v1.5h-1.5v1H19v1.5h-1.5v2H16v-5z"></path></svg></div>
+                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v13c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-13c0-.276-.224-.5-.5-.5h-13zM7 9h10v2H7V9zm0 4h7v2H7v-2z"></path></svg></div>
+                            <div class="action-icon"><svg viewBox="0 0 24 24" fill="var(--primary-color)"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2.5-9.5c.828 0 1.5-.672 1.5-1.5S10.328 7.5 9.5 7.5 8 8.172 8 9s.672 1.5 1.5 1.5zm6.5-1.5c0 .828-.672 1.5-1.5 1.5S13 9.828 13 9s.672-1.5 1.5-1.5 1.5.672 1.5 1.5zm-5 6c1.603 0 3.035-.783 3.945-2H9.055c.91 1.217 2.342 2 3.945 2z"></path></svg></div>
                         </div>
                         <button class="post-submit-btn" disabled>Post</button>
                     </div>
                 </div>
             </div>
+<?php endif; ?>
 
             <div class="divider"></div>
 
-            <!-- Feed -->
             <div class="feed">
-                <!-- Tweet 1 -->
                 <div class="tweet">
                     <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="Avatar" class="avatar">
                     <div class="tweet-content">
@@ -188,7 +162,6 @@
                           Welcome to AstraX!
                         </div>
                         <div class="tweet-actions">
-                            <!-- Reply -->
                             <div class="action-item reply">
                                 <div class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -197,7 +170,6 @@
                                     </svg></div>
                                 <span>24k</span>
                             </div>
-                            <!-- Repost -->
                             <div class="action-item repost">
                                 <div class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -206,7 +178,6 @@
                                     </svg></div>
                                 <span>112k</span>
                             </div>
-                            <!-- Like -->
                             <div class="action-item like">
                                 <div class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -215,7 +186,6 @@
                                     </svg></div>
                                 <span>3.2M</span>
                             </div>
-                            <!-- View -->
                             <div class="action-item view">
                                 <div class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -224,7 +194,6 @@
                                     </svg></div>
                                 <span>15M</span>
                             </div>
-                            <!-- Bookmark/Share -->
                             <div class="action-item share">
                                 <div class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -236,7 +205,6 @@
                     </div>
                 </div>
 
-                <!-- Tweet 2 -->
                 <div class="tweet">
                     <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=random" alt="Avatar"
                         class="avatar">
@@ -251,7 +219,6 @@
                         Halo!
                         </div>
                         <div class="tweet-image">
-                            <!-- A placeholder image that looks like a tweet attachment -->
                             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
                                 alt="Code">
                         </div>
@@ -297,7 +264,6 @@
             </div>
         </main>
 
-        <!-- Right Sidebar -->
         <aside class="right-sidebar">
             <div class="search-container">
                 <div class="search-box">
@@ -369,7 +335,7 @@
         </aside>
     </div>
 
-    <script src="script.js"></script>
+    <script src="<?= base_url('script.js?v=2') ?>"></script>
 </body>
 
 </html>

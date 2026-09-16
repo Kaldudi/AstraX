@@ -440,7 +440,6 @@ a {
 .action-item {
     display: flex;
     align-items: center;
-    group: hover;
 }
 
 .action-item span {

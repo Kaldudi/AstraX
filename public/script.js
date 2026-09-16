@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.style.color = '';
                 icon.style.fill = 'currentColor';
                 let count = span.textContent;
-                if(!count.includes('K')) {
+                let upperCount = count.toUpperCase();
+                if(!upperCount.includes('K') && !upperCount.includes('M')) {
                     let num = parseInt(count);
                     if(!isNaN(num)) span.textContent = num - 1;
                 }
@@ -88,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.style.color = '#f91880';
                 icon.style.fill = '#f91880';
                 let count = span.textContent;
-                if(!count.includes('K')) {
+                let upperCount = count.toUpperCase();
+                if(!upperCount.includes('K') && !upperCount.includes('M')) {
                     let num = parseInt(count);
                     if(!isNaN(num)) span.textContent = num + 1;
                 }
@@ -102,13 +104,30 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const icon = this.querySelector('svg');
+            const span = this.querySelector('span');
             
             if (this.style.color === 'rgb(0, 186, 124)') {
                 this.style.color = '';
                 icon.style.fill = 'currentColor';
+                if (span) {
+                    let count = span.textContent;
+                    let upperCount = count.toUpperCase();
+                    if(!upperCount.includes('K') && !upperCount.includes('M')) {
+                        let num = parseInt(count);
+                        if(!isNaN(num)) span.textContent = num - 1;
+                    }
+                }
             } else {
                 this.style.color = '#00ba7c';
                 icon.style.fill = '#00ba7c';
+                if (span) {
+                    let count = span.textContent;
+                    let upperCount = count.toUpperCase();
+                    if(!upperCount.includes('K') && !upperCount.includes('M')) {
+                        let num = parseInt(count);
+                        if(!isNaN(num)) span.textContent = num + 1;
+                    }
+                }
             }
         });
     });
