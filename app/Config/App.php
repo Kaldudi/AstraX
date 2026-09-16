@@ -16,7 +16,15 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost:8080/';
+    public string $baseURL = 'http://localhost/X_Twitter/public/';
+
+    public function __construct()
+    {
+        parent::__construct();
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $this->baseURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/X_Twitter/public/";
+        }
+    }
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
